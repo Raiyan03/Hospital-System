@@ -1,19 +1,197 @@
 ﻿@page "/Booking"
 @inject NavigationManager navManager
 @layout MainLayout___Copy
-<h3>patient</h3>
-<h1>Hello</h1>
-@for (int i = 0; i <= 5; i++)
+@using HospitalSystem.Data
+
+
+<style>
+    .page-heading{
+        text-align: center;
+        font-size: 25px;
+        border-bottom: 2px solid #B6BBC4;
+    }
+    .search-headings h2 {
+        text-align: center;
+        font-size: 16px;
+    }
+    .input-fields{
+        border-radius : 20px;
+        border: 1px solid;
+    }
+    td{
+        padding: 10px;
+    }
+    .input-table {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .appointment-detail {
+        text-align: center;
+    }
+
+
+    .search-button-appointment {
+        background-color: #7071E8;
+        color: white;
+        border-radius : 20px;
+    }
+    .patient-header{
+        margin-top: 10px;
+    }
+
+    .patient-detail > table{
+
+    }
+
+    .Searched-appointments{
+        padding: 5px;
+        border: 1px solid #B6BBC4;
+        border-radius: 12px;
+
+    }
+
+    #searchedAppointment th, #searchedAppointment td{
+        padding-top: 0px;
+        text-align: left;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-bottom: 5px;
+    }
+
+    .table-header{
+        border-bottom: 1px solid black;
+    }
+    .data-row{
+        padding-top: 5px;
+        border-bottom: 1px solid #B6BBC4;
+    }
+    #Edit-button{
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .Searched-appointments {
+        display: inline-block;
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<h1 class="page-heading" >View Appointments</h1>
+
+<div class="search-headings">
+    <h2>
+        Search by appointment No.
+    </h2>
+    <div class="appointment-detail">
+        <table class="input-table">
+            <tbody>
+                <tr>
+                    <td >
+                        <label for="code">Appointment Code:</label>
+                        <input type="text" class="input-fields" id="Appointment-code" name="Appointment-Code" placeholder="Enter appointment number">
+                    </td>
+                    <td>
+                        <button class="search-button-appointment">Search</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="search-headings">
+    <h2 class="patient-header">Search by patient info</h2>
+    <div class="patient-detail">
+        <table class ="input-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="patientid">Patient ID:</label>
+                        <input type="text" class="input-fields" id="Patient-Id" name="Patient-Id" placeholder="Enter patient id">
+                    </td>
+                    <td>
+                        <label for="patientName">Name:</label>
+                        <input type="text" class="input-fields" id="Patient-Name" name="PatientName" placeholder="Enter patient name">
+                    </td>
+                    <td>
+                        <button class="search-button-appointment">Search</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="Searched-appointments">
+        <div class="input-table" id="searchedAppointment">
+            <table>
+                <thead class="table-header">
+                    <tr>
+                        <th>
+                            Appoint#
+                        </th>
+                        <th>
+                            Patient#
+                        </th>
+                        <th>
+                            Patient Name
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                        <th>
+                            Doctor Name
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        Appointment currentIndex = new Appointment(i);
+                        <tr class="data-row">
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td id="Edit-button"><button class="search-button-appointment">Edit</button></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+@* @for (int i = 0; i <= 5; i++)
 {
     int currentIndex = i; // Capture the current value of i
-
-    <button @onclick="() => change(currentIndex)">Click</button>
+    string name = "Ryan";
+    string docname = "Khurshid";
+    <button @onclick="() => change(currentIndex, name, docname)">Click</button>
 }
-
+ *@
 @code {
-    public void change(int n)
+    public void change(int n, string m, string L)
     {
 
-        navManager.NavigateTo($"/counter/{n}");   gfghfyrtfnvhd
+        navManager.NavigateTo($"/counter/{n}/{m}/{L}");   
     }
 }

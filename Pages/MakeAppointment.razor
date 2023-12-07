@@ -1,0 +1,91 @@
+﻿@page "/MakeAppointment"
+@layout MainLayout___Copy
+
+<style>
+    .page-heading {
+        text-align: center;
+        font-size: 25px;
+        border-bottom: 2px solid #B6BBC4;
+    }
+
+    .input-table {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-fields,
+    select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        border: 1px solid #B6BBC4;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    .search-button-appointment {
+        background-color: #7071E8;
+        color: white;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+</style>
+
+<h1 class="page-heading">Make Booking</h1>
+
+<div class="input-table">
+    <table>
+        <tr>
+            <td>
+                <label for="PatientID">Patient ID:</label>
+                <input type="text" class="input-fields" id="PatientID" name="PatientID" placeholder="Enter Patient ID">
+            </td>
+            <td>
+                <label for="Date">Date:</label>
+                <input type="text" class="input-fields" id="Date" name="Date" placeholder="DD-MM-YY">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Time">Time:</label>
+                <select id="Time">
+                    @for (int hour = 10; hour <= 17; hour++)
+                    {
+                        for (int minute = 0; minute < 60; minute += 30)
+                        {
+                            <option>@($"{hour:D2}:{minute:D2}")</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td>
+                <label for="Speciality">Speciality:</label>
+                <select class="input-fields">
+                    <option>Ryanasdf</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Doctor">Doctor:</label>
+                <select class="input-fields">
+                    <option>ryaskdfak</option>
+                </select>
+            </td>
+            <td class="button-container">
+                <button class="search-button-appointment">Book</button>
+                <button class="search-button-appointment">New Patient?</button>
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    </table>
+</div>

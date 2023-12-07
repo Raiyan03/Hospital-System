@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject NavigationManager NavManager
 <div class="page">
 	<div class="sidebar">
 		<NavMenu />
@@ -7,9 +7,8 @@
 
 	<main>
 		<div class="top-row px-4">
-			<a href="https://docs.microsoft.com/aspnet/" target="_blank">Hello</a>
-			<a href="https://docs.microsoft.com/aspnet/" target="_blank">Hello</a>
-			<a href="https://docs.microsoft.com/aspnet/" target="_blank">Hello</a>
+			<a href="javascript:void(0);" @onclick="NavigateToViewBooking">View Appointment</a>
+			<a href="javascript:void(0);" @onclick="NavigateToMakeBooking">Make Appointment</a>
 		</div>
 
 		<article class="content px-4">
@@ -17,3 +16,15 @@
 		</article>
 	</main>
 </div>
+
+@code
+{
+	public void NavigateToMakeBooking()
+	{
+		NavManager.NavigateTo("/MakeAppointment");
+	}
+	public void NavigateToViewBooking()
+	{
+		NavManager.NavigateTo("/booking");
+	}
+}
