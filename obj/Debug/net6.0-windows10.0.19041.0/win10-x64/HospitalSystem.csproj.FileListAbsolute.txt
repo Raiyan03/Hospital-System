@@ -387,3 +387,5 @@ C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\q
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy.razor.rz.scp.css
+C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy - Copy.razor.rz.scp.css
+C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy - Copy - Copy.razor.rz.scp.css

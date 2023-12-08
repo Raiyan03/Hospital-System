@@ -30,29 +30,29 @@
     <AppXManifest Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-12-07T09:47:09.888</Modified>
+      <Modified>2023-12-08T01:04:01.840</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-12-07T04:41:29.680</Modified>
+      <Modified>2023-12-07T22:52:44.246</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.runtimeconfig.json">
       <PackagePath>HospitalSystem.runtimeconfig.json</PackagePath>
-      <Modified>2023-12-02T07:13:23.574</Modified>
+      <Modified>2023-12-07T21:53:11.030</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.dll">
       <PackagePath>HospitalSystem.dll</PackagePath>
-      <Modified>2023-12-07T09:47:09.078</Modified>
+      <Modified>2023-12-08T01:04:01.095</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>HospitalSystem.exe</PackagePath>
-      <Modified>2023-12-07T09:47:09.085</Modified>
+      <Modified>2023-12-08T01:04:01.121</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.deps.json">
       <PackagePath>HospitalSystem.deps.json</PackagePath>
-      <Modified>2023-12-02T07:13:23.370</Modified>
+      <Modified>2023-12-07T21:53:10.916</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.22\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1152,11 +1152,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\bundle\HospitalSystem.styles.css">
       <PackagePath>wwwroot\HospitalSystem.styles.css</PackagePath>
-      <Modified>2023-12-02T07:00:22.691</Modified>
+      <Modified>2023-12-07T21:22:34.233</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\projectbundle\HospitalSystem.bundle.scp.css">
       <PackagePath>wwwroot\HospitalSystem.bundle.scp.css</PackagePath>
-      <Modified>2023-12-02T07:00:22.692</Modified>
+      <Modified>2023-12-07T21:22:34.233</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\wwwroot\css\app.css">
       <PackagePath>wwwroot\css\app.css</PackagePath>
@@ -1441,6 +1441,14 @@
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
       <Modified>2023-12-02T07:00:22.682</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy - Copy.razor.css">
+      <PackagePath>Shared\MainLayout - Copy - Copy - Copy.razor.css</PackagePath>
+      <Modified>2023-12-02T07:00:17.594</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy.razor.css">
+      <PackagePath>Shared\MainLayout - Copy - Copy.razor.css</PackagePath>
+      <Modified>2023-12-02T07:00:17.594</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy.razor.css">
       <PackagePath>Shared\MainLayout - Copy.razor.css</PackagePath>

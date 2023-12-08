@@ -1,5 +1,8 @@
 ﻿@page "/counter"
-@page "/counter/{Id:int}/{Name}/{DocName}"
+
+@layout MainLayout___Copy___Copy
+@inject NavigationManager NavManager;
+
 @using HospitalSystem.Data
 <style>
     .page-heading {
@@ -96,12 +99,12 @@
             <tbody>
                 <tr>
                     <td>
-                        <label for="patientid">Patient ID:</label>
-                        <input type="text" class="input-fields" id="Patient-Id" name="Patient-Id" placeholder="Enter patient id">
+                        <label for="patientid">Doctor ID:</label>
+                        <input type="text" class="input-fields" id="Doctor-id" name="Doctor-id" placeholder="Enter Doctor Id">
                     </td>
                     <td>
-                        <label for="patientName">Name:</label>
-                        <input type="text" class="input-fields" id="Patient-Name" name="PatientName" placeholder="Enter patient name">
+                        <label for="Name">Name:</label>
+                        <input type="text" class="input-fields" id="Name" name="Name" placeholder="Enter Doctor's Name">
                     </td>
                     <td>
                         <button class="search-button-appointment">Search</button>
@@ -118,22 +121,13 @@
                 <thead class="table-header">
                     <tr>
                         <th>
-                            Appoint#
+                            Doctor#
                         </th>
                         <th>
-                            Patient#
+                            Name
                         </th>
                         <th>
-                            Patient Name
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Time
-                        </th>
-                        <th>
-                            Doctor Name
+                            Specialty
                         </th>
                         <th>
                             Edit
@@ -143,15 +137,15 @@
                 <tbody>
                     @for (int i = 0; i < 5; i++)
                     {
-                        Appointment currentIndex = new Appointment(i);
+                        string Fname = "Ryan";
+                        string Lname = "Anwar";
+                        string Speciality = "Cancer";
+
                         <tr class="data-row">
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td id="Edit-button"><button class="search-button-appointment">Edit</button></td>
+                            <td>2345</td>
+                            <td>Ryan Anwar</td>
+                            <td>Cancer</td>
+                            <td id="Edit-button"><button class="search-button-appointment" @onclick="() => NavigateToEditDoc(Fname, Lname, Speciality)">Edit</button></td>
                         </tr>
                     }
                 </tbody>
@@ -162,9 +156,20 @@
 </div>
 
 
+@code {
+    public void NavigateToEditDoc(string Fname, string LName, string Speciality)
+    {
+        NavManager.NavigateTo($"/EditDoctor/{Fname}/{LName}/{Speciality}");
+    }
+}
 
 
-@* @for (int i = 0; i <= 5; i++)
+
+
+
+
+
+                    @* @for (int i = 0; i <= 5; i++)
 {
     int currentIndex = i; // Capture the current value of i
     string name = "Ryan";
@@ -179,19 +184,3 @@
         navManager.NavigateTo($"/counter/{n}/{m}/{L}");
     }
 } *@
-
-@code {
-    [Parameter]
-    public int Id { get; set; } = 0;
-
-    [Parameter]
-    public string Name { get; set; }
-
-    [Parameter]
-    public string DocName { get; set; }
-
-    private void IncrementCount()
-    {
-        Id++;
-    }
-}

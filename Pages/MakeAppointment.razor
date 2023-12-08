@@ -1,6 +1,6 @@
 ﻿@page "/MakeAppointment"
 @layout MainLayout___Copy
-
+@inject NavigationManager NavManager
 <style>
     .page-heading {
         text-align: center;
@@ -81,7 +81,7 @@
             </td>
             <td class="button-container">
                 <button class="search-button-appointment">Book</button>
-                <button class="search-button-appointment">New Patient?</button>
+                <button class="search-button-appointment" @onclick="navigateToNewPatient">New Patient?</button>
             </td>
             <td>
                 
@@ -89,3 +89,10 @@
         </tr>
     </table>
 </div>
+
+@code{
+    public void navigateToNewPatient()
+    {
+        NavManager.NavigateTo("/New_Patient");
+    }
+}

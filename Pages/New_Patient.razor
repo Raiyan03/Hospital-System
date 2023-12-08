@@ -1,0 +1,86 @@
+﻿@* @page "/New_Patient/{PatientFName}/{PatientLName}/{PatientDOB}/{PatientGender}/{PatientDisease}/{PatientPhone}"*@
+@page "/New_Patient"
+<style>
+    .page-heading {
+        text-align: center;
+        font-size: 25px;
+        border-bottom: 2px solid #B6BBC4;
+    }
+
+    .input-table {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-fields {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        border: 1px solid #B6BBC4;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    .search-button-appointment {
+        background-color: #7071E8;
+        color: white;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+</style>
+
+<h1 class="page-heading">New Patient</h1>
+
+<div class="input-table">
+    <table>
+        <tr>
+            <td>
+                <label for="FirstName">First Name:</label>
+                <input type="text" class="input-fields" id="First-Name" name="First-Name" placeholder="Enter First Name">
+            </td>
+            <td>
+                <label for="LastName">Last Name:</label>
+                <input type="text" class="input-fields" id="Last-Name" name="Last-Name" placeholder="Enter Last Name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="DateOfBirth">Date of Birth:</label>
+                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Enter Doctors's Speciality">
+            </td>
+            <td>
+                <label for="Gender">Gender:</label>
+                <select class="input-fields">
+                    <option>M</option>
+                    <option>F</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Disease">Disease</label>
+                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Disease">
+            </td>
+            <td>
+                <label for="Contact">Phone</label>
+                <input type="text" class="input-fields" id="Contact" placeholder="Enter Phone no.">
+            </td>
+        </tr>
+        <tr>
+            <td class="button-container">
+                <button class="search-button-appointment">Done</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@code {
+
+}

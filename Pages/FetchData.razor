@@ -1,46 +1,180 @@
 ﻿@page "/fetchdata"
-
+@layout MainLayout___Copy___Copy___Copy
 @using HospitalSystem.Data
-@inject WeatherForecastService ForecastService
+@inject NavigationManager NavManager
+<style>
+    .page-heading {
+        text-align: center;
+        font-size: 25px;
+        border-bottom: 2px solid #B6BBC4;
+    }
 
-<h1>Weather forecast</h1>
+    .search-headings h2 {
+        text-align: center;
+        font-size: 16px;
+    }
 
-<p>This component demonstrates fetching data from a service.</p>
+    .input-fields {
+        border-radius: 20px;
+        border: 1px solid;
+    }
 
-@if (forecasts == null)
-{
-	<p><em>Loading...</em></p>
-}
-else
-{
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Date</th>
-				<th>Temp. (C)</th>
-				<th>Temp. (F)</th>
-				<th>Summary</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var forecast in forecasts)
-			{
-				<tr>
-					<td>@forecast.Date.ToShortDateString()</td>
-					<td>@forecast.TemperatureC</td>
-					<td>@forecast.TemperatureF</td>
-					<td>@forecast.Summary</td>
-				</tr>
-			}
-		</tbody>
-	</table>
-}
+    td {
+        padding: 10px;
+    }
+
+    .input-table {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .appointment-detail {
+        text-align: center;
+    }
+
+
+    .search-button-appointment {
+        background-color: #7071E8;
+        color: white;
+        border-radius: 20px;
+    }
+
+    .patient-header {
+        margin-top: 10px;
+    }
+
+    .patient-detail > table {
+    }
+
+    .Searched-appointments {
+        padding: 5px;
+        border: 1px solid #B6BBC4;
+        border-radius: 12px;
+    }
+
+    #searchedAppointment th, #searchedAppointment td {
+        padding-top: 0px;
+        text-align: left;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-bottom: 5px;
+    }
+
+    .table-header {
+        border-bottom: 1px solid black;
+    }
+
+    .data-row {
+        padding-top: 5px;
+        border-bottom: 1px solid #B6BBC4;
+    }
+
+    #Edit-button {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .Searched-appointments {
+        display: inline-block;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<h1 class="page-heading">View Patients</h1>
+
+
+<div class="search-headings">
+    <h2 class="patient-header">Search by patient info</h2>
+    <div class="patient-detail">
+        <table class="input-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="patientid">Patient ID:</label>
+                        <input type="text" class="input-fields" id="Patient-Id" name="Patient-Id" placeholder="Enter patient id">
+                    </td>
+                    <td>
+                        <label for="patientName">Name:</label>
+                        <input type="text" class="input-fields" id="Patient-Name" name="PatientName" placeholder="Enter patient name">
+                    </td>
+                    <td>
+                        <button class="search-button-appointment">Search</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="Searched-appointments">
+        <div class="input-table" id="searchedAppointment">
+            <table>
+                <thead class="table-header">
+                    <tr>
+                        <th>
+                            Patient#
+                        </th>
+                        <th>
+                            Patient Name
+                        </th>
+                        <th>
+                            Date of Birth
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Disease
+                        </th>
+                        <th>
+                            Contact
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 5; i++)
+                    {
+
+                        <tr class="data-row">
+                            <td>123486</td>
+                            <td>@pat.FName+" "@pat.LName</td>
+                            <td>@pat.DOB</td>
+                            <td>@pat.Gender</td>
+                            <td>@pat.Disease</td>
+                            <td>@pat.Contact</td>
+                            <td id="Edit-button"><button class="search-button-appointment" @onclick="() => NavigateToEditPatient(pat)">Edit</button></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
 
 @code {
-	private WeatherForecast[] forecasts;
+    //	private WeatherForecast[] forecasts;
 
-	protected override async Task OnInitializedAsync()
-	{
-		forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-	}
+    //protected override async Task OnInitializedAsync()
+    //{
+    //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    //}@
+    public Patient pat = new Patient("Ryan", "Sheikh", "10-02-03", "F", "TB", "7585991063");
+
+    public void NavigateToEditPatient(Patient patient)
+    {
+        NavManager.NavigateTo($"/EditPatient/{patient.FName}/{patient.LName}/{patient.DOB}/{patient.Gender}/{patient.Disease}/{patient.Contact}");
+    }
 }

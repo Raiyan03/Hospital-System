@@ -1,0 +1,30 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavManager
+<div class="page">
+	<div class="sidebar">
+		<NavMenu />
+	</div>
+
+	<main>
+		<div class="top-row px-4">
+			<a href="javascript:void(0);" @onclick="NavigateToViewDoctor">View Doctor</a>
+			<a href="javascript:void(0);" @onclick="NavigateTonewDoctor">New Doctor</a>
+		</div>
+
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
+</div>
+
+@code
+{
+	public void NavigateTonewDoctor()
+	{
+		NavManager.NavigateTo("/NewDoctor");
+	}
+	public void NavigateToViewDoctor()
+	{
+		NavManager.NavigateTo("/counter");
+	}
+}

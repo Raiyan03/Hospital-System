@@ -1081,6 +1081,12 @@
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy - Copy.razor.css">
+      <PackagePath>Shared\MainLayout - Copy - Copy - Copy.razor.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy.razor.css">
+      <PackagePath>Shared\MainLayout - Copy - Copy.razor.css</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy.razor.css">
       <PackagePath>Shared\MainLayout - Copy.razor.css</PackagePath>
     </AppxPackagedFile>
