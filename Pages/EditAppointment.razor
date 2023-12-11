@@ -1,6 +1,37 @@
-﻿@page "/EditAppointment"
+﻿@page "/EditAppointment/{aptId:int}/{patId:int}/{patName}/{date}/{time}/{docName}"
 @inject NavigationManager NavManager
+@using HospitalSystem.Data
 <style>
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading {
         text-align: center;
         font-size: 25px;
@@ -34,56 +65,190 @@
         border-radius: 20px;
         margin-top: 10px;
     }
-
+    #cancel-button
+    {
+        background-color: red;
+    }
 </style>
 
-<h1 class="page-heading">Make Booking</h1>
+<h1 class="page-heading">Edit Appointment</h1>
 
 <div class="input-table">
     <table>
         <tr>
             <td>
                 <label for="Date">Date:</label>
-                <input type="text" class="input-fields" id="Date" name="Date" placeholder="DD-MM-YY">
+                <input type="text" class="input-fields" id="Date" name="Date" placeholder="DD-MM-YY" @bind="date">
             </td>
         </tr>
         <tr>
             <td>
                 <label for="Time">Time:</label>
-                <select id="Time">
+                <select id="Time" @onchange="OnTimeSelect">
+                    <option value="@time">@time</option>
                     @for (int hour = 10; hour <= 17; hour++)
                     {
+
                         for (int minute = 0; minute < 60; minute += 30)
                         {
-                            <option>@($"{hour:D2}:{minute:D2}")</option>
+                            if (time != $"{hour:D2}:{minute:D2}")
+                            {
+                                <option value="@($"{hour:D2}:{minute:D2}")">@($"{hour:D2}:{minute:D2}")</option>
+                            }
                         }
                     }
                 </select>
             </td>
-            <td>
-                <label for="Speciality">Speciality:</label>
-                <select class="input-fields">
-                    <option>Ryanasdf</option>
-                </select>
-            </td>
+
         </tr>
         <tr>
             <td>
                 <label for="Doctor">Doctor:</label>
-                <select class="input-fields">
-                    <option>ryaskdfak</option>
+                <select class="input-fields" @onchange="OnSelectName">
+                        <option>@docName</option>
+                    @foreach (Doctor doctor in Doctors)
+                    {
+                        if(docName != $"{doctor.FNAME} {doctor.LNAME}")
+                        {
+                        <option value="@($"{doctor.FNAME} {doctor.LNAME} - ({doctor.Speciality})")">
+                            @($"{doctor.FNAME} {doctor.LNAME} - ({doctor.Speciality})")
+                        </option>
+                    
+                        }
+                    }
                 </select>
             </td>
             <td class="button-container">
-                <button class="search-button-appointment">Book</button>
-
+                <button class="search-button-appointment" @onclick="Done">Done</button>
             </td>
             <td>
+                <button class="search-button-appointment" id="cancel-button" @onclick="Cancel">Cancel Appointment</button>
             </td>
         </tr>
     </table>
 </div>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+@if (isEdited)
+{
+<div class="container">
+    <div id="success">
+        <p>@SuccessMessage</p>
+    </div>
+</div>
+}
 
-@code {
+
+@code 
+{
+    Appointment Controller = new Appointment();
+    List<Doctor> AvailabeDoctors = null;
+    List<Doctor> Doctors = null;
+    public string Name = null;
+    [Parameter]
+    public int aptId { get; set; }
+    [Parameter]
+    public int patid { get; set; }
+    [Parameter]
+    public string patName { get; set; }
+    [Parameter]
+    public string date { get; set; }
+    [Parameter]
+    public string time { get; set; }
+    [Parameter]
+    public string docName { get; set; }
+    string ErrorMessage = null;
+    bool isEdited = false;
+    string SuccessMessage;
+
+    protected override void OnInitialized()
+    {
+        FilterDoc();
+    }
+
+    public void AvailableDocs()
+    {
+        Doctors = Controller.AvailableDocs(date, time, patid);
+    }
+    public void OnTimeSelect(ChangeEventArgs e)
+    {
+        time = e.Value.ToString();
+
+    }
+
+    public void OnSelectName(ChangeEventArgs e)
+    {
+        docName = e.Value.ToString();
+    }
+
+    public void FilterDoc()
+    {
+        Doctors = Controller.AvailableDocs(date, time, patid);
+    }
+
+
+    public void Done()
+    {
+        try
+        {
+            // Validate the date format before processing
+            if (!FormatValidator.IsValidDateFormat(date))
+            {
+                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
+                return;
+            }
+
+            foreach (Doctor doctor in Doctors)
+            {
+                string fname = doctor.FNAME;
+                string lname = doctor.LNAME;
+                string Speciality = doctor.Speciality;
+                if (docName == $"{fname} {lname} - ({Speciality})" || docName == $"{fname} {lname}")
+                {
+                    Controller.update(aptId, doctor.ID, date, time);
+                    isEdited = true;
+                    SuccessMessage = "Info updated!";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while updating the appointment: {ex.Message}");
+        }
+    }
+
+    public void Cancel()
+    {
+        try
+        {
+            // Validate the date format before processing
+            if (!FormatValidator.IsValidDateFormat(date))
+            {
+                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
+                return;
+            }
+
+            Controller.Cancel(aptId);
+            isEdited = true;
+            SuccessMessage = "Appointment Cancelled";
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while canceling the appointment: {ex.Message}");
+        }
+    }
+
+    // Helper method to set the error message
+    private void ShowErrorMessage(string message)
+    {
+        // You can use this method to display the error message in your UI
+        ErrorMessage = message;
+    }
 
 }

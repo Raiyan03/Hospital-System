@@ -1,6 +1,43 @@
 ﻿@page "/NewPatient"
 @layout MainLayout___Copy___Copy___Copy
+@using HospitalSystem.Data
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message-area.success {
+        background-color: #d4edda;
+        
+        border: 1px solid #c3e6cb;
+    }
+
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading {
         text-align: center;
         font-size: 25px;
@@ -43,44 +80,122 @@
         <tr>
             <td>
                 <label for="FirstName">First Name:</label>
-                <input type="text" class="input-fields" id="First-Name" name="First-Name" placeholder="Enter First Name">
+                <input type="text" class="input-fields" id="First-Name" name="First-Name" placeholder="Enter First Name" @bind="Fname">
             </td>
             <td>
                 <label for="LastName">Last Name:</label>
-                <input type="text" class="input-fields" id="Last-Name" name="Last-Name" placeholder="Enter Last Name">
+                <input type="text" class="input-fields" id="Last-Name" name="Last-Name" placeholder="Enter Last Name" @bind="Lname">
             </td>
         </tr>
         <tr>
             <td>
                 <label for="DateOfBirth">Date of Birth:</label>
-                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Enter Doctors's Speciality">
+                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Enter Doctors's Speciality" @bind="DOB">
             </td>
             <td>
                 <label for="Gender">Gender:</label>
-                <select class="input-fields">
-                    <option>M</option>
-                    <option>F</option>
+                <select class="input-fields" @onchange="OnSelectGender">
+                    <option>--Select--</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>
                 <label for="Disease">Disease</label>
-                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Disease">
+                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Disease" @bind="Disease">
             </td>
             <td>
                 <label for="Contact">Phone</label>
-                <input type="text" class="input-fields" id="Contact" placeholder="Enter Phone no.">
+                <input type="text" class="input-fields" id="Contact" placeholder="Enter Phone no." @bind="Contact" >
             </td>
         </tr>
         <tr>
             <td class="button-container">
-                <button class="search-button-appointment">Done</button>
+                <button class="search-button-appointment" @onclick="done">Done</button>
             </td>
         </tr>
     </table>
 </div>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+@if (IsPatientAdded)
+{
+    <div class="container">
+        <div id="success">
+            <p>@SuccessMessage</p>
+        </div>
+    </div>
+}
 
-@code {
+@code
+{
+    public string Fname;
+    public string Lname;
+    public string DOB;
+    public string Gender;
+    public string Disease;
+    public string Contact;
+    string ErrorMessage;
+    bool IsPatientAdded = false; // Track whether a patient is added
+    string SuccessMessage;
+    Patient Controller = new Patient();
 
+    public void OnSelectGender(ChangeEventArgs e)
+    {
+        Gender = e.Value.ToString();
+    }
+
+    public void done()
+    {
+        try
+        {
+            // Validate date format
+            if (!FormatValidator.IsValidDateFormat(DOB))
+            {
+                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
+                return;
+            }
+
+            // Validate phone number
+            if (!FormatValidator.IsValidPhoneNumber(Contact))
+            {
+                ShowErrorMessage("Invalid phone number. Please enter a valid 10-digit phone number.");
+                return;
+            }
+            int ID = Controller.GenerateId();
+            object Patient = new
+            {
+                id = ID,
+                fname = Fname,
+                lname = Lname,
+                dob = DOB,
+                gender = Gender,
+                disease = Disease,
+                contact = Contact
+            };
+
+            Controller.Add(Patient);
+            IsPatientAdded = true; // Set flag to indicate successful addition
+            SuccessMessage = $"Patient added successfully! Patient#:{ID}";
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while adding the patient: {ex.Message}");
+        }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        // You can use this method to display the error message in your UI
+        ErrorMessage = message;
+        IsPatientAdded = false; // Reset flag on error
+    }
 }

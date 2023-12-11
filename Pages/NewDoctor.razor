@@ -1,6 +1,18 @@
 ﻿@page "/NewDoctor"
 @layout MainLayout___Copy___Copy
+@using HospitalSystem.Data
 <style>
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading {
         text-align: center;
         font-size: 25px;
@@ -42,24 +54,82 @@
         <tr>
             <td>
                 <label for="FirstName">First Name:</label>
-                <input type="text" class="input-fields" id="First-Name" name="First-Name" placeholder="Enter First Name">
+                <input type="text" class="input-fields" id="First-Name" name="First-Name" placeholder="Enter First Name" @bind="FName">
             </td>
             <td>
                 <label for="LastName">Last Name:</label>
-                <input type="text" class="input-fields" id="Last-Name" name="Last-Name" placeholder="Enter Last Name">
+                <input type="text" class="input-fields" id="Last-Name" name="Last-Name" placeholder="Enter Last Name" @bind="LName">
             </td>
         </tr>
         <tr>
             <td>
                 <label for="Speciality">Speciality:</label>
-                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Enter Doctors's Speciality">
+                <input type="text" class="input-fields" id="Speciality" name="Speciality" placeholder="Enter Doctors's Speciality" @bind="Speciality">
             </td>
             <td class="button-container">
-                <button class="search-button-appointment">Done</button>
+                <button class="search-button-appointment" @onclick="done">Done</button>
             </td>
         </tr>
     </table>
 </div>
-@code {
 
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+else if (IsSuccess)
+{
+    <div class="container">
+        <div id="success">
+            <p>@SuccessMessage</p>
+        </div>
+    </div>
+}
+@code {
+    string ErrorMessage;
+    string FName;
+    string LName;
+    string Speciality;
+    Doctor Controller = new Doctor();
+    bool IsSuccess = false;
+    string SuccessMessage;
+    public void done()
+    {
+        try
+        {
+            // Validate speciality
+            if (string.IsNullOrWhiteSpace(Speciality))
+            {
+                ShowErrorMessage("Speciality cannot be empty.");
+                return;
+            }
+
+            int id = Controller.GenerateId();
+            object doctor = new
+            {
+                Id = id,
+                Fname = FName,
+                Lname = LName,
+                speciality = Speciality
+            };
+
+            Controller.Add(doctor);
+            SuccessMessage = $"Doctor added successfully!, DoctorID: {id}";
+            IsSuccess = true;
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while adding the doctor: {ex.Message}");
+        }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        // You can use this method to display the error message in your UI
+        ErrorMessage = message;
+    }
 }

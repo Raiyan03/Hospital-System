@@ -1,7 +1,37 @@
-﻿@page "/EditDoctor/{FName}/{LName}/{Speciality}"
-
+﻿@page "/EditDoctor/{id:int}/{FName}/{LName}/{Speciality}"
+@using HospitalSystem.Data
 
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading {
         text-align: center;
         font-size: 25px;
@@ -62,8 +92,26 @@
         </tr>
     </table>
 </div>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+if (isEdited)
+{
+<div class="container">
+    <div id="success">
+        <p>@SuccessMessage</p>
+    </div>
+</div>
+}
 
 @code {
+    [Parameter]
+    public int id { get; set; }
     [Parameter]
     public string FName { get; set; }
 
@@ -72,8 +120,35 @@
 
     [Parameter]
     public string Speciality { get; set; }
+    public Doctor Controller = new Doctor();
+    string ErrorMessage = null;
+    bool isEdited = false;
+    string SuccessMessage = "Info updated!";
     public void Done()
     {
-        
+        try
+        {
+            object Doctor = new
+            {
+                Id = id,
+                Fname = FName,
+                Lname = LName,
+                speciality = Speciality
+            };
+            Controller.Update(Doctor);
+            isEdited = true;
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while updating the doctor: {ex.Message}");
+        }
     }
+
+
+    private void ShowErrorMessage(string message)
+    {
+
+        ErrorMessage = message;
+    }
+
 }

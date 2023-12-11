@@ -30,29 +30,29 @@
     <AppXManifest Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-12-08T01:04:01.840</Modified>
+      <Modified>2023-12-11T08:42:51.472</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-12-07T22:52:44.246</Modified>
+      <Modified>2023-12-11T08:35:20.609</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.runtimeconfig.json">
       <PackagePath>HospitalSystem.runtimeconfig.json</PackagePath>
-      <Modified>2023-12-07T21:53:11.030</Modified>
+      <Modified>2023-12-10T04:02:23.610</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.dll">
       <PackagePath>HospitalSystem.dll</PackagePath>
-      <Modified>2023-12-08T01:04:01.095</Modified>
+      <Modified>2023-12-11T08:42:50.699</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>HospitalSystem.exe</PackagePath>
-      <Modified>2023-12-08T01:04:01.121</Modified>
+      <Modified>2023-12-11T08:42:50.701</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\HospitalSystem.deps.json">
       <PackagePath>HospitalSystem.deps.json</PackagePath>
-      <Modified>2023-12-07T21:53:10.916</Modified>
+      <Modified>2023-12-10T04:02:23.502</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.22\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1078,6 +1078,10 @@
       <PackagePath>Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll</PackagePath>
       <Modified>2022-09-08T21:05:54.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\microsoft.win32.systemevents\6.0.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll">
+      <PackagePath>Microsoft.Win32.SystemEvents.dll</PackagePath>
+      <Modified>2021-10-22T23:40:18.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.InteractiveExperiences.Projection.dll">
       <PackagePath>Microsoft.InteractiveExperiences.Projection.dll</PackagePath>
       <Modified>2022-08-04T00:41:32.000</Modified>
@@ -1122,9 +1126,45 @@
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
       <Modified>2022-09-07T21:54:34.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\oracle.manageddataaccess.core\3.21.120\lib\netstandard2.1\Oracle.ManagedDataAccess.dll">
+      <PackagePath>Oracle.ManagedDataAccess.dll</PackagePath>
+      <Modified>2023-10-01T03:44:56.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.configuration.configurationmanager\6.0.0\lib\net6.0\System.Configuration.ConfigurationManager.dll">
+      <PackagePath>System.Configuration.ConfigurationManager.dll</PackagePath>
+      <Modified>2021-10-22T23:51:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.diagnostics.performancecounter\6.0.1\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll">
+      <PackagePath>System.Diagnostics.PerformanceCounter.dll</PackagePath>
+      <Modified>2022-03-14T17:11:52.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.directoryservices\6.0.1\runtimes\win\lib\net6.0\System.DirectoryServices.dll">
+      <PackagePath>System.DirectoryServices.dll</PackagePath>
+      <Modified>2023-01-24T05:38:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.directoryservices.protocols\6.0.2\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll">
+      <PackagePath>System.DirectoryServices.Protocols.dll</PackagePath>
+      <Modified>2023-05-19T20:51:06.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.drawing.common\6.0.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll">
+      <PackagePath>System.Drawing.Common.dll</PackagePath>
+      <Modified>2021-10-22T23:48:10.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.io.pipelines\6.0.3\lib\net6.0\System.IO.Pipelines.dll">
       <PackagePath>System.IO.Pipelines.dll</PackagePath>
       <Modified>2022-04-13T17:49:36.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.security.cryptography.protecteddata\6.0.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll">
+      <PackagePath>System.Security.Cryptography.ProtectedData.dll</PackagePath>
+      <Modified>2021-10-22T23:51:04.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.security.permissions\6.0.0\lib\net6.0\System.Security.Permissions.dll">
+      <PackagePath>System.Security.Permissions.dll</PackagePath>
+      <Modified>2021-10-22T23:49:50.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\system.windows.extensions\6.0.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll">
+      <PackagePath>System.Windows.Extensions.dll</PackagePath>
+      <Modified>2021-10-22T23:49:58.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\raiya\.nuget\packages\microsoft.graphics.win2d\1.0.3.1\runtimes\win10-x64\native\Microsoft.Graphics.Canvas.dll">
       <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
@@ -1152,11 +1192,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\bundle\HospitalSystem.styles.css">
       <PackagePath>wwwroot\HospitalSystem.styles.css</PackagePath>
-      <Modified>2023-12-07T21:22:34.233</Modified>
+      <Modified>2023-12-08T04:43:46.412</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\projectbundle\HospitalSystem.bundle.scp.css">
       <PackagePath>wwwroot\HospitalSystem.bundle.scp.css</PackagePath>
-      <Modified>2023-12-07T21:22:34.233</Modified>
+      <Modified>2023-12-08T04:43:46.412</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\wwwroot\css\app.css">
       <PackagePath>wwwroot\css\app.css</PackagePath>
@@ -1444,11 +1484,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy - Copy.razor.css">
       <PackagePath>Shared\MainLayout - Copy - Copy - Copy.razor.css</PackagePath>
-      <Modified>2023-12-02T07:00:17.594</Modified>
+      <Modified>2023-12-08T04:43:46.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy - Copy.razor.css">
       <PackagePath>Shared\MainLayout - Copy - Copy.razor.css</PackagePath>
-      <Modified>2023-12-02T07:00:17.594</Modified>
+      <Modified>2023-12-08T04:43:46.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\CPRG211\final\HospitalSystem\Shared\MainLayout - Copy.razor.css">
       <PackagePath>Shared\MainLayout - Copy.razor.css</PackagePath>

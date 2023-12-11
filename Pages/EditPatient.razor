@@ -1,9 +1,24 @@
-﻿@page "/EditPatient/{PatientFName}/{PatientLName}/{PatientDOB}/{PatientGender}/{PatientDisease}/{PatientPhone}"
+﻿@page "/EditPatient/{PatientId:int}/{PatientFName}/{PatientLName}/{PatientDOB}/{PatientGender}/{PatientDisease}/{PatientPhone}"
+
+@using HospitalSystem.Data
+
 <style>
     .page-heading {
         text-align: center;
         font-size: 25px;
         border-bottom: 2px solid #B6BBC4;
+    }
+
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
     }
 
     .input-table {
@@ -35,7 +50,7 @@
 
 </style>
 
-<h1 class="page-heading">New Patient</h1>
+<h1 class="page-heading">Edit Patient</h1>
 
 <div class="input-table">
     <table>
@@ -56,7 +71,7 @@
             </td>
             <td>
                 <label for="Gender">Gender:</label>
-                <select class="input-fields">
+                <select class="input-fields" @onchange="OnSelectGender">
                     @if (PatientGender == "M")
                     {
                         <option value="M">M</option>
@@ -82,13 +97,33 @@
         </tr>
         <tr>
             <td class="button-container">
-                <button class="search-button-appointment">Done</button>
+                <button class="search-button-appointment" @onclick="done">Done</button>
             </td>
         </tr>
     </table>
 </div>
-
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+if (isEdited)
+{
+<div class="container">
+    <div id="success">
+        <p>@SuccessMessage</p>
+    </div>
+</div>
+}
 @code {
+    string ErrorMessage;
+    Patient Controller = new Patient();
+
+    [Parameter]
+    public int PatientID { get; set; }
     [Parameter]
     public string PatientFName { get; set; }
     [Parameter]
@@ -101,4 +136,55 @@
     public string PatientDisease { get; set; }
     [Parameter]
     public string PatientPhone { get; set; }
+    string SuccessMessage = "Info updated!";
+    bool isEdited = false;
+
+    public void OnSelectGender(ChangeEventArgs e)
+    {
+        PatientGender = e.Value.ToString();
+    }
+    public void done()
+    {
+        try
+        {
+            // Validate date format
+            if (!FormatValidator.IsValidDateFormat(PatientDOB))
+            {
+                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
+                return;
+            }
+
+            // Validate phone number format
+            if (!FormatValidator.IsValidPhoneNumber(PatientPhone))
+            {
+                ShowErrorMessage("Invalid phone number format. Please enter a valid phone number.");
+                return;
+            }
+
+            object patient = new
+            {
+                id = PatientID,
+                Fname = PatientFName,
+                Lname = PatientLName,
+                DOB = PatientDOB,
+                Gender = PatientGender,
+                Disease = PatientDisease,
+                Phone = PatientPhone
+            };
+
+            Controller.Update(patient);
+            isEdited = true;
+
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while updating the patient: {ex.Message}");
+        }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        ErrorMessage = message;
+    }
+
 }

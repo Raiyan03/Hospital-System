@@ -389,3 +389,13 @@ C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\P
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy.razor.rz.scp.css
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy - Copy.razor.rz.scp.css
 C:\CPRG211\final\HospitalSystem\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\scopedcss\Shared\MainLayout - Copy - Copy - Copy.razor.rz.scp.css
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Oracle.ManagedDataAccess.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Microsoft.Win32.SystemEvents.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Configuration.ConfigurationManager.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Diagnostics.PerformanceCounter.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.DirectoryServices.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.DirectoryServices.Protocols.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Drawing.Common.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Security.Cryptography.ProtectedData.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Security.Permissions.dll
+C:\CPRG211\final\HospitalSystem\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\System.Windows.Extensions.dll

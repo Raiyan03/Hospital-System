@@ -5,6 +5,24 @@
 
 
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading{
         text-align: center;
         font-size: 25px;
@@ -92,12 +110,12 @@
         <table class="input-table">
             <tbody>
                 <tr>
-                    <td >
+                    <td>
                         <label for="code">Appointment Code:</label>
-                        <input type="text" class="input-fields" id="Appointment-code" name="Appointment-Code" placeholder="Enter appointment number">
+                        <input type="text" class="input-fields" id="Appointment-code" name="Appointment-Code" placeholder="Enter appointment number" @bind="@aptcode">
                     </td>
                     <td>
-                        <button class="search-button-appointment">Search</button>
+                        <button class="search-button-appointment" @onclick="searchByAptId">Search</button>
                     </td>
                 </tr>
             </tbody>
@@ -113,14 +131,14 @@
                 <tr>
                     <td>
                         <label for="patientid">Patient ID:</label>
-                        <input type="text" class="input-fields" id="Patient-Id" name="Patient-Id" placeholder="Enter patient id">
+                        <input type="text" class="input-fields" id="Patient-Id" name="Patient-Id" placeholder="Enter patient id" @bind="@patId">
                     </td>
                     <td>
                         <label for="patientName">Name:</label>
-                        <input type="text" class="input-fields" id="Patient-Name" name="PatientName" placeholder="Enter patient name">
+                        <input type="text" class="input-fields" id="Patient-Name" name="PatientName" placeholder="Enter patient name" @bind="@PatName">
                     </td>
                     <td>
-                        <button class="search-button-appointment">Search</button>
+                        <button class="search-button-appointment" @onclick="SearchByPat">Search</button>
                     </td>
                 </tr>
             </tbody>
@@ -157,17 +175,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 0; i < 5; i++)
+                    @if (Appointments != null && Appointments.Any())
                     {
-
+                        foreach (Appointment appointment in Appointments)
+                        {
+                            Appointment temp = appointment;
+                            <tr class="data-row">
+                                <td>@appointment.AptId</td>
+                                <td>@appointment.PatientId</td>
+                                <td>@appointment.PatName</td>
+                                <td>@appointment.Date</td>
+                                <td>@appointment.Time</td>
+                                <td>@appointment.DocName</td>
+                                <td id="Edit-button">
+                                    <button class="search-button-appointment" @onclick="() => change(temp)">Edit</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
                         <tr class="data-row">
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td id="Edit-button"><button class="search-button-appointment">Edit</button></td>
+                            <td colspan="7">No appointments found</td>
                         </tr>
                     }
                 </tbody>
@@ -176,22 +205,81 @@
         </div>
     </div>
 </div>
-
-
-
-
-@* @for (int i = 0; i <= 5; i++)
+@if (!string.IsNullOrEmpty(ErrorMessage))
 {
-    int currentIndex = i; // Capture the current value of i
-    string name = "Ryan";
-    string docname = "Khurshid";
-    <button @onclick="() => change(currentIndex, name, docname)">Click</button>
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
 }
- *@
-@code {
-    public void change(int n, string m, string L)
-    {
 
-        navManager.NavigateTo($"/counter/{n}/{m}/{L}");   
+
+
+@code {
+    public string aptcode = null;
+    public string patId = null;
+    public string PatName = null;
+    string ErrorMessage;
+    List<Appointment> Appointments = null;
+    Appointment Controller = new Appointment();
+    public void searchByAptId()
+    {
+        try
+        {
+            int code = Convert.ToInt32(aptcode);
+            Appointments = Controller.SearchByAptID(code);
+            ErrorMessage = null;
+        }
+        catch (FormatException)
+        {
+            ErrorMessage = "Please enter a valid numeric appointment code.";
+        }
+        catch (Exception ex)
+        {
+
+            ErrorMessage = $"An error occurred: {ex.Message}";
+        }
+    }
+    public void SearchByPat()
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(patId) && string.IsNullOrEmpty(PatName))
+            {
+                int code = Convert.ToInt32(patId);
+                Appointments = Controller.SearchByID(code);
+            }
+            else if (string.IsNullOrEmpty(patId) && !string.IsNullOrEmpty(PatName))
+            {
+                Appointments = Controller.SearchByName(PatName);
+            }
+            else if (!string.IsNullOrEmpty(patId) && !string.IsNullOrEmpty(PatName))
+            {
+                int code = Convert.ToInt32(patId);
+                Appointments = Controller.Search(code, PatName);
+            }
+            ErrorMessage = null;
+        }
+        catch (FormatException)
+        {
+            ShowErrorMessage("Please enter a valid numeric appointment code.");
+        }
+        catch (Exception ex)
+        {
+
+            ShowErrorMessage($"An error occurred: {ex.Message}");
+        }
+    }
+
+    public void change(Appointment obj)
+    { 
+        
+        navManager.NavigateTo($"/EditAppointment/{obj.AptId}/{obj.PatientId}/{obj.PatName}/{obj.Date}/{obj.Time}/{obj.DocName}");
+    }
+    private void ShowErrorMessage(string message)
+    {
+        // You can use this method to display the error message in your UI
+        ErrorMessage = message;
     }
 }

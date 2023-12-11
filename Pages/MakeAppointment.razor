@@ -1,7 +1,38 @@
 ﻿@page "/MakeAppointment"
 @layout MainLayout___Copy
 @inject NavigationManager NavManager
+@using HospitalSystem.Data
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #success {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
     .page-heading {
         text-align: center;
         font-size: 25px;
@@ -38,50 +69,53 @@
 
 </style>
 
-<h1 class="page-heading">Make Booking</h1>
+<h1 class="page-heading">Make Appointment</h1>
 
 <div class="input-table">
     <table>
         <tr>
             <td>
                 <label for="PatientID">Patient ID:</label>
-                <input type="text" class="input-fields" id="PatientID" name="PatientID" placeholder="Enter Patient ID">
+                <input type="text" class="input-fields" id="PatientID" name="PatientID" placeholder="Enter Patient ID" @bind="ID">
             </td>
             <td>
                 <label for="Date">Date:</label>
-                <input type="text" class="input-fields" id="Date" name="Date" placeholder="DD-MM-YY">
+                <input type="text" class="input-fields" id="Date" name="Date" placeholder="DD-MM-YY" @bind="date">
             </td>
         </tr>
         <tr>
             <td>
                 <label for="Time">Time:</label>
-                <select id="Time">
+                <select id="Time" @onchange="OnSelectTime">
                     @for (int hour = 10; hour <= 17; hour++)
                     {
+
                         for (int minute = 0; minute < 60; minute += 30)
                         {
-                            <option>@($"{hour:D2}:{minute:D2}")</option>
+ 
+                            
+                            <option value="@($"{hour:D2}:{minute:D2}")">@($"{hour:D2}:{minute:D2}")</option>
+                            
                         }
                     }
                 </select>
             </td>
             <td>
-                <label for="Speciality">Speciality:</label>
-                <select class="input-fields">
-                    <option>Ryanasdf</option>
+                <label for="Doctor">Doctor:</label>
+                <select class="input-fields" @onchange="OnSelectName">
+                    <option>--Select--</option>
+                    @foreach (Doctor doctor in Doctors)
+                    {
+                        <option value=@doctor.ID>
+                            @($"{doctor.FNAME} {doctor.LNAME} - ({doctor.Speciality})")
+                        </option>
+                    }
                 </select>
             </td>
         </tr>
         <tr>
-            <td>
-                <label for="Doctor">Doctor:</label>
-                <select class="input-fields">
-                    <option>ryaskdfak</option>
-                </select>
-            </td>
             <td class="button-container">
-                <button class="search-button-appointment">Book</button>
-                <button class="search-button-appointment" @onclick="navigateToNewPatient">New Patient?</button>
+                <button class="search-button-appointment" @onclick="book">Book</button>
             </td>
             <td>
                 
@@ -89,10 +123,94 @@
         </tr>
     </table>
 </div>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="container">
+        <div class="message-area">
+            <p class="text-danger">@ErrorMessage</p>
+        </div>
+    </div>
+}
+@if (isAppointment)
+{
+    <div class="container">
+        <div id="success">
+            <p>@successMessage</p>
+        </div>
+    </div>
+}
 
 @code{
-    public void navigateToNewPatient()
+    string ErrorMessage;
+    public string ID;
+    public string date;
+    public string time;
+    public int docId;
+    public string Name;
+    Doctor ControllerDoc = new Doctor();
+    Patient ControllerPat = new Patient();
+    List<Doctor> Doctors = new List<Doctor>();
+    Appointment Controller = new Appointment();
+    bool isAppointment = false;
+    string successMessage = null;
+
+    protected override void OnInitialized()
     {
-        NavManager.NavigateTo("/New_Patient");
+        Doctors = ControllerDoc.ReadAll();
+    }
+
+
+    public void OnSelectTime(ChangeEventArgs e)
+    {
+        time = e.Value.ToString();
+        Doctors = Controller.AvailableDocs(time, date);
+    }
+    public void OnSelectName(ChangeEventArgs e)
+    {
+        docId = Convert.ToInt32(e.Value);
+    }
+    public void book()
+    {
+        try
+        {
+            // Validate date format
+            if (!FormatValidator.IsValidDateFormat(date))
+            {
+                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
+                return;
+            }
+
+            // Validate phone number
+            bool isValidPatientID = ControllerPat.Validate(Convert.ToInt32(ID));
+            if (!isValidPatientID)
+            {
+                ShowErrorMessage("Invalid Patient ID. Please enter a valid Patient ID.");
+                return;
+            }
+
+            // Proceed with booking logic
+            bool isValid = ControllerPat.Validate(Convert.ToInt32(ID));
+            if (isValid)
+            {
+                int id = Controller.generateID();
+                Controller.Save(id, date, time, Convert.ToInt32(ID), docId);
+                successMessage = $"Appointment scheduled, Appointment#: {id}";
+                isAppointment = true;
+            }
+            else
+            {
+                ShowErrorMessage($"Patient doesn't Exists");
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage($"An error occurred while making the appointment");
+        }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        // You can use this method to display the error message in your UI
+        ErrorMessage = message;
     }
 }
