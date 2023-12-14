@@ -9,12 +9,6 @@
         justify-content: center;
     }
 
-    .message-area.success {
-        background-color: #d4edda;
-        
-        border: 1px solid #c3e6cb;
-    }
-
     #success {
         position: fixed;
         bottom: 20px;
@@ -126,7 +120,7 @@
         </div>
     </div>
 }
-@if (IsPatientAdded)
+else if(IsPatientAdded)
 {
     <div class="container">
         <div id="success">
@@ -160,15 +154,13 @@
             // Validate date format
             if (!FormatValidator.IsValidDateFormat(DOB))
             {
-                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
-                return;
+                throw new InvalidDateFormatException();
             }
 
             // Validate phone number
             if (!FormatValidator.IsValidPhoneNumber(Contact))
             {
-                ShowErrorMessage("Invalid phone number. Please enter a valid 10-digit phone number.");
-                return;
+                throw new InvalidPhoneNumberFormatException();
             }
             int ID = Controller.GenerateId();
             object Patient = new
@@ -186,9 +178,17 @@
             IsPatientAdded = true; // Set flag to indicate successful addition
             SuccessMessage = $"Patient added successfully! Patient#:{ID}";
         }
+        catch (InvalidDateFormatException ex)
+        {
+            ShowErrorMessage(ex.Message);
+        }
+        catch (InvalidPhoneNumberFormatException ex)
+        {
+            ShowErrorMessage(ex.Message);
+        }
         catch (Exception ex)
         {
-            ShowErrorMessage($"An error occurred while adding the patient: {ex.Message}");
+            ShowErrorMessage(ex.Message);
         }
     }
 

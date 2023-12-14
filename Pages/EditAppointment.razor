@@ -179,7 +179,6 @@
     public void OnTimeSelect(ChangeEventArgs e)
     {
         time = e.Value.ToString();
-
     }
 
     public void OnSelectName(ChangeEventArgs e)
@@ -217,6 +216,10 @@
                 }
             }
         }
+        catch(InvalidDateFormatException ex)
+        {
+            ShowErrorMessage(ex.Message);
+        }
         catch (Exception ex)
         {
             ShowErrorMessage($"An error occurred while updating the appointment: {ex.Message}");
@@ -227,20 +230,14 @@
     {
         try
         {
-            // Validate the date format before processing
-            if (!FormatValidator.IsValidDateFormat(date))
-            {
-                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
-                return;
-            }
-
             Controller.Cancel(aptId);
             isEdited = true;
             SuccessMessage = "Appointment Cancelled";
         }
+
         catch (Exception ex)
         {
-            ShowErrorMessage($"An error occurred while canceling the appointment: {ex.Message}");
+            ShowErrorMessage($"An error occurred while canceling the appointment");
         }
     }
 

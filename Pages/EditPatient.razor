@@ -20,6 +20,24 @@
         border-radius: 5px;
         display: inline-block;
     }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
 
     .input-table {
         margin-top: 10px;
@@ -110,7 +128,7 @@
         </div>
     </div>
 }
-if (isEdited)
+else if (isEdited) // Edited this line
 {
 <div class="container">
     <div id="success">
@@ -150,15 +168,13 @@ if (isEdited)
             // Validate date format
             if (!FormatValidator.IsValidDateFormat(PatientDOB))
             {
-                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
-                return;
+                throw new InvalidDateFormatException();
             }
 
             // Validate phone number format
             if (!FormatValidator.IsValidPhoneNumber(PatientPhone))
             {
-                ShowErrorMessage("Invalid phone number format. Please enter a valid phone number.");
-                return;
+                throw new InvalidPhoneNumberFormatException();
             }
 
             object patient = new
@@ -176,9 +192,17 @@ if (isEdited)
             isEdited = true;
 
         }
+        catch (InvalidDateFormatException ex)
+        {
+            ShowErrorMessage(ex.Message);
+        }
+        catch (InvalidPhoneNumberFormatException ex)
+        {
+            ShowErrorMessage(ex.Message);
+        }
         catch (Exception ex)
         {
-            ShowErrorMessage($"An error occurred while updating the patient: {ex.Message}");
+            ShowErrorMessage(ex.Message);
         }
     }
 

@@ -176,11 +176,10 @@
             // Validate date format
             if (!FormatValidator.IsValidDateFormat(date))
             {
-                ShowErrorMessage("Invalid date format. Please use DD-MM-YY.");
-                return;
+                throw new InvalidDateFormatException();
             }
 
-            // Validate phone number
+            // Validate patient ID number
             bool isValidPatientID = ControllerPat.Validate(Convert.ToInt32(ID));
             if (!isValidPatientID)
             {
@@ -201,6 +200,10 @@
             {
                 ShowErrorMessage($"Patient doesn't Exists");
             }
+        }
+        catch(InvalidDataException ex)
+        {
+            ShowErrorMessage(ex.Message);
         }
         catch (Exception ex)
         {

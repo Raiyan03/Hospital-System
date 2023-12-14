@@ -2,6 +2,12 @@
 @layout MainLayout___Copy___Copy
 @using HospitalSystem.Data
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     #success {
         position: fixed;
         bottom: 20px;
@@ -9,6 +15,18 @@
         transform: translateX(-50%);
         background-color: lightgreen;
         color: black;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .message-area {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f8d7da;
+        color: #721c24;
         padding: 10px;
         border-radius: 5px;
         display: inline-block;
@@ -123,7 +141,7 @@ else if (IsSuccess)
         }
         catch (Exception ex)
         {
-            ShowErrorMessage($"An error occurred while adding the doctor: {ex.Message}");
+            ShowErrorMessage($"An error occurred while adding the doctor");
         }
     }
 

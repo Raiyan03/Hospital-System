@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -190,6 +191,11 @@ namespace HospitalSystem.Data
         }
 
         // Method to save a new appointment with specified details
+        
+        // Changed from the 1st submission file
         public void Save(int apId, string date, string time, int PatId, int docId)
-
-
+        {
+            broker.Insert(apId, date, time, PatId, docId);
+        }
+    }
+}
