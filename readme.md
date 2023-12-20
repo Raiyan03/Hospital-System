@@ -3,6 +3,10 @@
 ## About
 This .NET MAUI BLAZOR hybrid application seamlessly integrates with an Oracle 21c database to persist data in a relational structure, leveraging Foreign Keys to establish relationships across various tables. The primary functionality enables users, assumed to be system administrators, to schedule appointments with doctors. The process involves entering a patient ID. If the patient is not yet registered in the system, users can create a new patient profile by providing relevant details. A unique patient ID is automatically generated, facilitating the subsequent appointment booking process.
 
+## Database ER Diagram
+
+![Sample Image](https://i.ibb.co/NjjhcKz/Hospital-DB-modified.png)
+
 ## Video demo
 
 [![Video Preview](https://i.ibb.co/HxcLVN9/Screenshot-2023-12-20-011705.png)](https://clipchamp.com/watch/YY1saFqDp7m)
