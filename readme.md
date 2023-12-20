@@ -5,7 +5,7 @@ This .NET MAUI BLAZOR hybrid application seamlessly integrates with an Oracle 21
 
 ## Database ER Diagram
 
-[![Hospital-DB.png](https://i.postimg.cc/1tMRX0bs/Hospital-DB.png)]
+![Hospital-DB.png](https://i.postimg.cc/1tMRX0bs/Hospital-DB.png)
 
 ## Video demo
 
